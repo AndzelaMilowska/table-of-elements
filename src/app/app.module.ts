@@ -13,7 +13,7 @@ import { TableModule } from './table/table/table.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TableModule
+    TableModule,
   ],
   providers: [
     provideAnimationsAsync()

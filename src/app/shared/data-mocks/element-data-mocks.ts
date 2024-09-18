@@ -1,9 +1,4 @@
-interface PeriodicElement {
-    position: number,
-    name: string,
-    weight: number,
-    symbol: string
-}
+import { PeriodicElement } from "../periodic-element.interface";
 
 export const ELEMENT_DATA: PeriodicElement[] = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},

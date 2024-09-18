@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject, debounceTime } from 'rxjs';
-
-import { ELEMENT_DATA } from '../../../data-mocks/element-data-mocks';
+import { PeriodicElement } from '../../shared/periodic-element.interface';
+import { MatPaginator } from '@angular/material/paginator';
+import { DataStorageService } from '../../shared/dataStorage.service';
 
 @Component({
   selector: 'app-table',
@@ -11,24 +12,44 @@ import { ELEMENT_DATA } from '../../../data-mocks/element-data-mocks';
 })
 export class TableComponent implements OnInit {
   private filterInput = new Subject<string>();
-  private debounceTimeMs = 2000;
-
+  private debounceTime = 2000;
+  private dataSource: PeriodicElement[] = [];
   displayedColumns: string[] = ['number', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  tableData = new MatTableDataSource<PeriodicElement, MatPaginator>(
+    this.dataSource
+  );
+
+  constructor(private dataService: DataStorageService) {
+    this.dataService.elementsTableData.subscribe((data) => {
+      this.dataSource = data;
+      this.refreshData();
+    });
+  }
 
   ngOnInit(): void {
+    this.dataService.fetchData();
+
     this.filterInput
-      .pipe(debounceTime(this.debounceTimeMs))
+      .pipe(debounceTime(this.debounceTime))
       .subscribe((searchValue) => {
         this.filterData(searchValue);
       });
   }
 
-  getUserFilterInput(event: Event) {
+  refreshData() {
+    this.tableData.data = this.dataSource;
+  }
+
+  getUserFilterInput(event: Event): void {
     this.filterInput.next((event.target as HTMLInputElement).value);
   }
 
-  filterData(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  filterData(filterValue: string): void {
+    this.tableData.filter = filterValue.trim().toLowerCase();
+  }
+
+  updateRecord(index: number, newElementData: PeriodicElement) {
+    this.dataService.updateData(index, newElementData);
+    this.refreshData();
   }
 }
