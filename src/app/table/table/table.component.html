@@ -26,7 +26,7 @@
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; let i=index; columns: displayedColumns;" (click)="updateRecord(i, {position: 11, name: 'aaa', weight: 584, symbol: 'jajo'})"></tr>
+    <tr class="row" mat-row *matRowDef="let row; let i=index; columns: displayedColumns;" (click)="updateRecord(i, row)"></tr>
   
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>

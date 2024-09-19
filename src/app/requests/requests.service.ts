@@ -9,4 +9,5 @@ export class RequestsService {
   getData(): Observable<PeriodicElement[]> {
     return of(ELEMENT_DATA).pipe(delay(2000));
   }
+
 }

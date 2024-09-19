@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject, debounceTime } from 'rxjs';
 import { PeriodicElement } from '../../shared/periodic-element.interface';
-import { MatPaginator } from '@angular/material/paginator';
 import { DataStorageService } from '../../shared/dataStorage.service';
+import { PopupComponent } from '../../popup/popup.component';
 
 @Component({
   selector: 'app-table',
@@ -19,7 +21,10 @@ export class TableComponent implements OnInit {
     this.dataSource
   );
 
-  constructor(private dataService: DataStorageService) {
+  constructor(
+    private dataService: DataStorageService,
+    public dialog: MatDialog
+  ) {
     this.dataService.elementsTableData.subscribe((data) => {
       this.dataSource = data;
       this.refreshData();
@@ -34,6 +39,7 @@ export class TableComponent implements OnInit {
       .subscribe((searchValue) => {
         this.filterData(searchValue);
       });
+
   }
 
   refreshData() {
@@ -48,8 +54,8 @@ export class TableComponent implements OnInit {
     this.tableData.filter = filterValue.trim().toLowerCase();
   }
 
-  updateRecord(index: number, newElementData: PeriodicElement) {
-    this.dataService.updateData(index, newElementData);
-    this.refreshData();
+  updateRecord(index: number, rowData: PeriodicElement) {
+    const recordData = {index: index, elementData: rowData}
+    let dialogReference = this.dialog.open(PopupComponent, { data: recordData });
   }
 }

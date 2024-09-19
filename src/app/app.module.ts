@@ -9,7 +9,7 @@ import { TableModule } from './table/table/table.module';
 @NgModule({
   declarations: [
     AppComponent,
-      ],
+          ],
   imports: [
     BrowserModule,
     AppRoutingModule,
