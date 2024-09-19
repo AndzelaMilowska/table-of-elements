@@ -56,6 +56,6 @@ export class TableComponent implements OnInit {
 
   updateRecord(index: number, rowData: PeriodicElement) {
     const recordData = {index: index, elementData: rowData}
-    let dialogReference = this.dialog.open(PopupComponent, { data: recordData });
+    this.dialog.open(PopupComponent, { data: recordData });
   }
 }

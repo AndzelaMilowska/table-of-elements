@@ -13,12 +13,12 @@ export class PopupComponent {
     private dataService: DataStorageService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-  onSubmit(data: PeriodicElement) {
-    if (!this.dataService.isValidElement(data)) {
+  onSubmit(formData: PeriodicElement) {
+    if (!this.dataService.isValidElement(formData)) {
       alert('Invalid element data');
       return;
     }
-    
-    this.dataService.updateData(this.data.index, data);
+
+    this.dataService.updateData(this.data.index, formData);
   }
 }

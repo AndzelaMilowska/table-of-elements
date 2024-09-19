@@ -37,12 +37,14 @@ export class DataStorageService {
       !('position' in data) ||
       !('name' in data) ||
       !('weight' in data) ||
-      !('symbol' in data) ||
-      typeof data.position !== 'number' ||
-      typeof data.weight !== 'number'
+      !('symbol' in data)
     )
       return false;
 
+    data.position = +data.position;
+    data.weight = +data.weight;
+
+    if (Number.isNaN(data.position) || Number.isNaN(data.weight)) return false;
     data.name = data.name + '';
     data.symbol = data.symbol + '';
 
