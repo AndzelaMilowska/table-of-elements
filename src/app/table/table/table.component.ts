@@ -39,7 +39,6 @@ export class TableComponent implements OnInit {
       .subscribe((searchValue) => {
         this.filterData(searchValue);
       });
-
   }
 
   refreshData() {
@@ -55,7 +54,7 @@ export class TableComponent implements OnInit {
   }
 
   updateRecord(index: number, rowData: PeriodicElement) {
-    const recordData = {index: index, elementData: rowData}
+    const recordData = { index: index, elementData: rowData };
     this.dialog.open(PopupComponent, { data: recordData });
   }
 }

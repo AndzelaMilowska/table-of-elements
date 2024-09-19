@@ -3,7 +3,8 @@
     <mat-dialog-content>
         <mat-form-field floatLabel="always" appearance="outline" hideRequiredMarker>
             <mat-label>No.</mat-label>
-            <input matInput [ngModel]="data.elementData.position" name="position" required pattern="^[0-9]*$" #elementPosition="ngModel"/>
+            <input matInput [ngModel]="data.elementData.position" name="position" required pattern="^[0-9]*$"
+                #elementPosition="ngModel" />
             <mat-error *ngIf="!elementPosition.valid && elementPosition.touched">Enter number</mat-error>
         </mat-form-field>
 
@@ -15,13 +16,14 @@
 
         <mat-form-field floatLabel="always" appearance="outline" hideRequiredMarker>
             <mat-label>Weight</mat-label>
-            <input matInput required pattern="^[1-9]\d*(\.\d+)?$" [ngModel]="data.elementData.weight" name="weight"  #elementWeight="ngModel" />
+            <input matInput required pattern="^[1-9]\d*(\.\d+)?$" [ngModel]="data.elementData.weight" name="weight"
+                #elementWeight="ngModel" />
             <mat-error *ngIf="!elementWeight.valid && elementWeight.touched">Enter weight number</mat-error>
         </mat-form-field>
 
         <mat-form-field floatLabel="always" appearance="outline" hideRequiredMarker>
             <mat-label>Symbol</mat-label>
-            <input matInput required [ngModel]="data.elementData.symbol" name="symbol"  #elementSymbol="ngModel"/>
+            <input matInput required [ngModel]="data.elementData.symbol" name="symbol" #elementSymbol="ngModel" />
             <mat-error *ngIf="!elementSymbol.valid && elementSymbol.touched">Enter symbol</mat-error>
         </mat-form-field>
     </mat-dialog-content>
